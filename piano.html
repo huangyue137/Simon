@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>儿童钢琴（模拟）</title>
+  <style>
+    :root { --radius: 18px; }
+    body{
+      margin:0; font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f6f7fb; color:#111;
+      display:flex; justify-content:center; padding: 24px;
+    }
+    .app{
+      width:min(980px, 100%);
+      background:#fff; border-radius: 24px; padding: 18px 18px 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    header{
+      display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      margin-bottom: 14px;
+    }
+    h1{ font-size: 18px; margin:0; }
+    .hint{ font-size: 13px; color:#555; margin:0; }
+    .controls{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .btn{
+      border:0; padding:10px 12px; border-radius: 14px; cursor:pointer;
+      background:#111; color:#fff; font-weight:600;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .toggle{
+      display:flex; align-items:center; gap:8px; font-size: 13px; color:#333;
+      background:#f0f2f7; padding:10px 12px; border-radius: 14px;
+      user-select:none;
+    }
+    input[type="range"]{ width: 140px; }
+
+    .piano{
+      display:grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 12px;
+    }
+    .key{
+      border:0; border-radius: var(--radius);
+      min-height: 140px;
+      cursor:pointer;
+      position:relative;
+      color:#111;
+      font-weight:800;
+      font-size: 20px;
+      display:flex; align-items:flex-end; justify-content:center;
+      padding: 10px 8px;
+      box-shadow: 0 10px 0 rgba(0,0,0,.12);
+      transition: transform .05s ease, box-shadow .05s ease, filter .1s ease;
+      touch-action: none;
+      user-select:none;
+    }
+    .key small{
+      position:absolute; top:10px; left:10px;
+      font-size: 12px; font-weight:700; opacity:.8;
+      background: rgba(255,255,255,.6);
+      padding: 4px 8px; border-radius: 999px;
+    }
+    .key:active, .key.pressed{
+      transform: translateY(6px);
+      box-shadow: 0 4px 0 rgba(0,0,0,.12);
+      filter: brightness(.98);
+    }
+
+    .panel{
+      margin-top: 16px;
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      background:#f8f9fd; border-radius: 18px; padding: 12px 14px;
+    }
+    .note{ font-weight: 800; }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background:#fff; border: 1px solid #e3e6f2;
+      padding: 2px 8px; border-radius: 10px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 720px){
+      .piano{ grid-template-columns: repeat(4, 1fr); }
+      .key{ min-height: 120px; font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>🎹 儿童钢琴（模拟）</h1>
+        <p class="hint">点击/触摸按键发声；键盘：<span class="kbd">A S D F J K L ;</span></p>
+      </div>
+      <div class="controls">
+        <label class="toggle">
+          音色cat > /Users/leinan/Desktop/piano.html <<'EOF'
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>儿童钢琴（模拟）</title>
+  <style>
+    :root { --radius: 18px; }
+    body{
+      margin:0; font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f6f7fb; color:#111;
+      display:flex; justify-content:center; padding: 24px;
+    }
+    .app{
+      width:min(980px, 100%);
+      background:#fff; border-radius: 24px; padding: 18px 18px 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    header{
+      display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      margin-bottom: 14px;
+    }
+    h1{ font-size: 18px; margin:0; }
+    .hint{ font-size: 13px; color:#555; margin:0; }
+    .controls{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .btn{
+      border:0; padding:10px 12px; border-radius: 14px; cursor:pointer;
+      background:#111; color:#fff; font-weight:600;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .toggle{
+      display:flex; align-items:center; gap:8px; font-size: 13px; color:#333;
+      background:#f0f2f7; padding:10px 12px; border-radius: 14px;
+      user-select:none;
+    }
+    input[type="range"]{ width: 140px; }
+
+    .piano{
+      display:grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 12px;
+    }
+    .key{
+      border:0; border-radius: var(--radius);
+      min-height: 140px;
+      cursor:pointer;
+      position:relative;
+      color:#111;
+      font-weight:800;
+      font-size: 20px;
+      display:flex; align-items:flex-end; justify-content:center;
+      padding: 10px 8px;
+      box-shadow: 0 10px 0 rgba(0,0,0,.12);
+      transition: transform .05s ease, box-shadow .05s ease, filter .1s ease;
+      touch-action: none;
+      user-select:none;
+    }
+    .key small{
+      position:absolute; top:10px; left:10px;
+      font-size: 12px; font-weight:700; opacity:.8;
+      background: rgba(255,255,255,.6);
+      padding: 4px 8px; border-radius: 999px;
+    }
+    .key:active, .key.pressed{
+      transform: translateY(6px);
+      box-shadow: 0 4px 0 rgba(0,0,0,.12);
+      filter: brightness(.98);
+    }
+
+    .panel{
+      margin-top: 16px;
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      background:#f8f9fd; border-radius: 18px; padding: 12px 14px;
+    }
+    .note{ font-weight: 800; }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background:#fff; border: 1px solid #e3e6f2;
+      padding: 2px 8px; border-radius: 10px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 720px){
+      .piano{ grid-template-columns: repeat(4, 1fr); }
+      .key{ min-height: 120px; font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>🎹 儿童钢琴（模拟）</h1>
+        <p class="hint">点击/触摸按键发声；键盘：<span class="kbd">A S D F J K L ;</span></p>
+      </div>
+      <div class="controls">
+        <label class="toggle">
+          音色
+          <select id="wave">
+            <option value="sine">柔和（sine）</option>
+            <option value="triangle" selected>童趣（triangle）</option>
+            <option value="square">电子（square）</option>
+            <option value="sawtooth">明亮（sawtooth）</option>
+          </select>
+        </label>
+        <label class="toggle">
+          音量
+          <input id="vol" type="range" min="0" max="1" step="0.01" value="0.35" />
+        </label>
+        <button class="btn" id="stop">停止所有声音</button>
+      </div>
+    </header>
+
+    <div class="piano" id="piano"></div>
+
+    <div class="panel">
+      <div>当前音符：<span class="note" id="now">—</span></div>
+      <div>提示：移动端需要先点一下页面才能启动音频（浏览器限制）。</div>
+    </div>
+  </div>
+
+  <script>
+    // 8个键（C大调一组），键盘映射：A S D F J K L ;
+    const keys = [
+      { name: "C",  freq: 261.63, kbd: "a", color: "#FF6B6B" },
+      { name: "D",  freq: 293.66, kbd: "s", color: "#FFA94D" },
+      { name: "E",  freq: 329.63, kbd: "d", color: "#FFD43B" },
+      { name: "F",  freq: 349.23, kbd: "f", color: "#69DB7C" },
+      { name: "G",  freq: 392.00, kbd: "j", color: "#4DABF7" },
+      { name: "A",  freq: 440.00, kbd: "k", color: "#748FFC" },
+      { name: "B",  freq: 493.88, kbd: "l", color: "#B197FC" },
+      { name: "C2", freq: 523.25, kbd: ";", color: "#FF6BD6" },
+    ];
+
+    const pianoEl = document.getElementById("piano");
+    const nowEl = document.getElementById("now");
+    const waveEl = document.getElementById("wave");
+    const volEl = document.getElementById("vol");
+    const stopBtn = document.getElementById("stop");
+
+    let audioCtx = null;
+    const active = new Map(); // noteName -> {osc, gain, timeout}
+
+    function ensureAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      return audioCtx;
+    }
+
+    function stopNote(name) {
+      const item = active.get(name);
+      if (!item) return;
+
+      clearTimeout(item.timeout);
+      try {
+        const ctx = ensureAudio();
+        const t = ctx.currentTime;
+        item.gain.gain.cancelScheduledValues(t);
+        item.gain.gain.setValueAtTime(item.gain.gain.value || 0.0001, t);
+        item.gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.03);
+        item.osc.stop(t + 0.035);
+      } catch (e) {}
+      active.delete(name);
+    }
+
+    function playNote(note, holdMs = 650) {
+      const ctx = ensureAudio();
+      stopNote(note.name);
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = waveEl.value;
+      osc.frequency.value = note.freq;
+
+      const t = ctx.currentTime;
+      const volume = Math.max(0.0001, parseFloat(volEl.value));
+
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(volume, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + holdMs / 1000);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(t);
+
+      const timeout = setTimeout(() => stopNote(note.name), holdMs + 50);
+      active.set(note.name, { osc, gain, timeout });
+
+      nowEl.textContent = `${note.name} (${note.freq.toFixed(2)}Hz)`;
+    }
+
+    function stopAll() {
+      for (const name of [...active.keys()]) stopNote(name);
+      nowEl.textContent = "—";
+    }
+
+    // 渲染琴键
+    const btnEls = new Map();
+    keys.forEach(note => {
+      const btn = document.createElement("button");
+      btn.className = "key";
+      btn.style.background = note.color;
+      btn.dataset.name = note.name;
+      btn.innerHTML = `<small>${note.kbd.toUpperCase()}</small>${note.name}`;
+
+      const down = (e) => {
+        e.preventDefault();
+        btn.classList.add("pressed");
+        playNote(note, 700);
+      };
+      const up = (e) => {
+        e.preventDefault();
+        btn.classList.remove("pressed");
+        // 如果你想“松开即停”，取消下一行注释：
+        // stopNote(note.name);
+      };
+
+      btn.addEventListener("pointerdown", down);
+      btn.addEventListener("pointerup", up);
+      btn.addEventListener("pointercancel", up);
+      btn.addEventListener("pointerleave", up);
+
+      pianoEl.appendChild(btn);
+      btnEls.set(note.name, btn);
+    });
+
+    // 键盘支持
+    const kbdToNote = new Map(keys.map(n => [n.kbd, n]));
+    const pressedSet = new Set();
+
+    window.addEventListener("keydown", (e) => {
+      const k = e.key.toLowerCase();
+      if (!kbdToNote.has(k) || pressedSet.has(k)) return;
+      pressedSet.add(k);
+      const note = kbdToNote.get(k);
+      btnEls.get(note.name)?.classList.add("pressed");
+      playNote(note, 700);
+    });
+
+    window.addEventListener("keyup", (e) => {
+      const k = e.key.toLowerCase();
+      if (!kbdToNote.has(k)) return;
+      pressedSet.delete(k);
+      const note = kbdToNote.get(k);
+      btnEls.get(note.name)?.classList.remove("pressed");
+    });
+
+    stopBtn.addEventListener("click", stopAll);
+
+    // 首次交互初始化音频
+    window.addEventListener("pointerdown", ensureAudio, { once: true });
+  </script>
+</body>
+</html>
